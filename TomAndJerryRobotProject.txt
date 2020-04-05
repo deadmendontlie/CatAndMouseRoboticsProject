@@ -1,8 +1,0 @@
-Things that we need to do for the cat and mouse project
-Create the cat movement system
-Create the mouse movement system
-Create the cat tracking system
-Create the mouse tracking system
-Create cat wandering/searching mode
-Create mouse wandering/hiding mode
-Add a system to get them unstuck?
