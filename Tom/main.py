@@ -9,6 +9,7 @@ from pybricks.tools import print, wait, StopWatch
 from pybricks.robotics import DriveBase
 
 # Write your program here
+#Kody did everything below this atm check the github if you don't believe me
 def Tom():
     brick.sound.beep()
     colorSensor = ColorSensor(Port.S4)
