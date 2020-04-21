@@ -18,7 +18,7 @@ def Tom():
     leftMotor = Motor(Port.B)
     rightMotor = Motor(Port.C)
     while not Button.LEFT in brick.buttons():
-        brick.display.text(colorSensor.ambient())
+        brick.display.text(colorSensor.reflection())
     while not Button.RIGHT in brick.buttons():
         brick.display.text(touchSensor.pressed())
     while not Button.CENTER in brick.buttons():
