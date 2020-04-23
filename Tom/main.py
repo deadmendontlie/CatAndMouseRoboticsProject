@@ -19,24 +19,19 @@ leftMotor = Motor(Port.B)
 rightMotor = Motor(Port.C)
 
 def Tom():
-    done = False
-    while not Button.LEFT in brick.buttons():
-        brick.display.text(colorSensor.reflection())
-    while not Button.RIGHT in brick.buttons():
-        brick.display.text(touchSensor.pressed())
-    while not Button.CENTER in brick.buttons():
-        brick.display.text(sonarSensor.distance())
-    while not Button.DOWN in brick.buttons():
-        leftMotor.dc(30)
-        wait(2000)
-        leftMotor.dc(0)
-    while not Button.UP in brick.buttons():
-        rightMotor.dc(30)
-        wait(2000)
-        rightMotor.dc(0)
-    while not done
-        if(chase == True)
-            done = True;
+    runing = True
+    while running:
+        if sonarSensor.distance() <1275
+            value = chase()
+            while value != 0
+                if value = 1
+                    leftMotor.dc(0)
+                    rightMotor.dc(0)
+                    runing = False      
+        else:
+            searchTurn()
+    else:
+        pass
     
 def chase():
     chaseValue = (sonarSensor.distance()/1275)/2
@@ -44,16 +39,19 @@ def chase():
         leftMotor.dc(0)
         rightMotor.dc(0)
         if(colorSensor.reflection() < 20)
+            leftMotor.dc(10)
+            rightMotor.dc(10)
             touchSensor.pressed()
-            return True
+            return 1
         else:
             leftMotor.dc(-30)
             rightMotor.dc(-30)
             wait(1500)
+            return 0
     else:
         leftMotor.dc(100 * chaseValue)
         rightMotor.dc(100 * chaseValue)
-        return False
+        return -1
 
 def searchTurn():
     checks = 0
@@ -71,6 +69,7 @@ def search forward()
     leftMotor.dc(30)
     rightMotor.dc(30)
     wait(2000)
+
 def main():
     Tom()
 main()
