@@ -57,7 +57,7 @@ def searchTurn():
             return True
         else:
             checks = checks + 1
-    searchforward()
+    searchForward()
     return False
 
 def main():
