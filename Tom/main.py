@@ -17,58 +17,49 @@ sonarSensor = UltrasonicSensor(Port.S2)
 touchSensor = TouchSensor(Port.S1)
 leftMotor = Motor(Port.B)
 rightMotor = Motor(Port.C)
+robot = DriveBase(leftMotor, rightMotor, 56, 114)
 
-def Tom():
-    runing = True
+
+def tom():
+    running = True
     while running:
-        if sonarSensor.distance() <1275
-            value = chase()
-            while value != 0
-                if value = 1
-                    leftMotor.dc(0)
-                    rightMotor.dc(0)
-                    runing = False      
-        else:
+        chaseValue = chase()
+        if chaseValue == 1:
+            running = False
+        elif chaseValue == 0:
             searchTurn()
-    else:
-        pass
-    
+
 def chase():
-    chaseValue = (sonarSensor.distance()/1275)/2
-    if(chaseValue < .1)
-        leftMotor.dc(0)
-        rightMotor.dc(0)
-        if(colorSensor.reflection() < 20)
-            leftMotor.dc(10)
-            rightMotor.dc(10)
-            touchSensor.pressed()
+    sensorValue = sonarSensor.distance() / 1275
+    if colorSensor.reflection() > .2 and sensorValue < 200:
+        robot.drive_time(50,0, 2000)
+        if touchSensor.pressed():
             return 1
         else:
-            leftMotor.dc(-30)
-            rightMotor.dc(-30)
-            wait(1500)
+            robot.drive_time(-30,0, 2000)
             return 0
     else:
-        leftMotor.dc(100 * chaseValue)
-        rightMotor.dc(100 * chaseValue)
+        speed = 100 * sensorValue * 1.5
+        leftMotor.dc(speed)
+        rightMotor.dc(speed)
+        wait(3000)
         return -1
+
+
+def searchForward():
+    robot.drive_time(50, 0, 2000)
 
 def searchTurn():
     checks = 0
-    while sonarSensor.distance > 1275 and checks < 5
-        leftMotor.dc(20)
-        rightMotor.dc(0)
-        wait(1000)
-        if sonarSensor.distance < 1275
-            leftMotor.dc(0)
+    while sonarSensor.distance() > 1275 and checks < 5:
+        robot.drive_time(0,90, 1000)
+        if sonarSensor.distance() < 1275:
             return True
         else:
             checks = checks + 1
+    searchforward()
+    return False
 
-def search forward()
-    leftMotor.dc(30)
-    rightMotor.dc(30)
-    wait(2000)
-
-def if __name__ == "__main__":
+def main():
     tom()
+main()
