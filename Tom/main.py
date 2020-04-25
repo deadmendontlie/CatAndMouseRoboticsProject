@@ -24,26 +24,35 @@ def tom():
     running = True
     while running:
         chaseValue = chase()
+        print(chaseValue)
         if chaseValue == 1:
             running = False
         elif chaseValue == 0:
             searchTurn()
 
 def chase():
-    sensorValue = sonarSensor.distance() / 1275
-    if colorSensor.reflection() > .2 and sensorValue < 200:
-        robot.drive_time(50,0, 2000)
-        if touchSensor.pressed():
-            return 1
+    sensorValue = sonarSensor.distance()
+    if sensorValue < 1275:
+        if sensorValue < 100:
+            print('in')
+            leftMotor.dc(50)
+            rightMotor.dc(52)
+            wait(1000)
+            if  touchSensor.pressed() and colorSensor.color() == Color.BLACK:
+                leftMotor.dc(0)
+                rightMotor.dc(0)
+                return 1
+            else:
+                robot.drive_time(-50,0, 2000)
+                return 0
         else:
-            robot.drive_time(-30,0, 2000)
-            return 0
-    else:
-        speed = 100 * sensorValue * 1.5
-        leftMotor.dc(speed)
-        rightMotor.dc(speed)
-        wait(3000)
-        return -1
+            speed = (100 * (sensorValue / 1275))
+            if speed < 30:
+                speed = speed + 20
+            leftMotor.dc(speed)
+            rightMotor.dc(speed + 2)
+            return -1
+    return 0
 
 
 def searchForward():
@@ -52,12 +61,12 @@ def searchForward():
 def searchTurn():
     checks = 0
     while sonarSensor.distance() > 1275 and checks < 5:
-        robot.drive_time(0,90, 1000)
+        robot.drive_time(40,90, 1000)
         if sonarSensor.distance() < 1275:
             return True
         else:
             checks = checks + 1
-    searchforward()
+    searchForward()
     return False
 
 def main():
