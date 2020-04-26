@@ -44,19 +44,34 @@ def SensorTest():
     
 def Jerry():
     threshold = 500
+    count = 0
+
     while not Button.CENTER in brick.buttons():
         while True:
             while sonarSensor.distance() < threshold:
-                print(sonarSensor.distance())
-                robot.drive(-100, 0)
+                # give Jerry an initial speed boost 
+                # the closer the object is to Jerry, the faster the speed boost
+                pid = (threshold - sonarSensor.distance()) * 0.75
+
+                # only the first time Jerry detects an object close to it
+                if count == 0:
+                    robot.drive(-pid, 0)
+                else:
+                    robot.drive(-100, 0)
+
+                # slows down after hitting a wall
                 if (touchSensor.pressed() == True):
+                    # backs up, changes direction, and starts running at normal speed
                     robot.drive(100, 0)
                     robot.drive_time(100, 90, 1000)
+                    count = 1
             while sonarSensor.distance() >= threshold:
-                robot.drive(0, 0)
+                # staying idle and just spinning
+                left_motor.dc(20)
+                wait(100)
 
 def main():
-    SensorTest()
+    # SensorTest()
     Jerry()
 
 main()
