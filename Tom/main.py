@@ -43,7 +43,8 @@ def chase():
                 rightMotor.dc(0)
                 return 1
             else:
-                robot.drive_time(-50,0, 2000)
+                robot.drive_time(-50,0, 5000)
+                robot.drive_time(50,90,3000)
                 return 0
         else:
             speed = (100 * (sensorValue / 1275))
