@@ -12,7 +12,8 @@ brick.sound.beep()
 
 colorSensor = ColorSensor(Port.S4)
 sonarSensor = UltrasonicSensor(Port.S2)
-touchSensor = TouchSensor(Port.S1)
+# touchSensor = TouchSensor(Port.S1)
+touchSensor = TouchSensor(Port.S3) # Tom touch sensor on S1
 
 left_motor = Motor(Port.B)
 right_motor = Motor(Port.C)
