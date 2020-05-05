@@ -19,7 +19,6 @@ leftMotor = Motor(Port.B)
 rightMotor = Motor(Port.C)
 robot = DriveBase(leftMotor, rightMotor, 56, 114)
 
-
 def tom():
     running = True
     while running:
