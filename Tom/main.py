@@ -8,9 +8,6 @@ from pybricks.parameters import (Port, Stop, Direction, Button, Color,
 from pybricks.tools import print, wait, StopWatch
 from pybricks.robotics import DriveBase
 
-# Write your program here
-#Kody did everything below this atm check the github if you don't believe me
-
 brick.sound.beep()
 colorSensor = ColorSensor(Port.S4)
 sonarSensor = UltrasonicSensor(Port.S2)
